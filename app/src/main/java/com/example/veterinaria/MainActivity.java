@@ -43,14 +43,22 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, MyPetActivity.class);
                         startActivity(intent);
                     }
+                    case R.id.nav_home:{
+                        drawerLayout.closeDrawers();
+                    }
+                    break;
                 }
-
                 return false;
             }
         });
 
     }
 
+    // override the onOptionsItemSelected()
+    // function to implement
+    // the item click listener callback
+    // to open and close the navigation
+    // drawer when the icon is clicked
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
