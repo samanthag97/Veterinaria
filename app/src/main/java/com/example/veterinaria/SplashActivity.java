@@ -16,6 +16,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        //hiding action bar
         getSupportActionBar().hide();
         //making windows full screen:
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -32,7 +33,7 @@ public class SplashActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 finally{
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, WelcomeActivity.class);
                     startActivity(intent);
                     finish();
                 }
