@@ -12,6 +12,15 @@
         android:theme="@style/Theme.Veterinaria"
         tools:targetApi="31">
         <activity
+            android:name=".ClinicsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DrawerBaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeActivity"
             android:exported="false" />
         <activity
@@ -23,8 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyPetActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MyPetActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

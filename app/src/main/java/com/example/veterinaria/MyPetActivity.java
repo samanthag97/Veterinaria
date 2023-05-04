@@ -9,31 +9,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.veterinaria.databinding.ActivityDashboardBinding;
+import com.example.veterinaria.databinding.ActivityMyPetBinding;
 import com.google.android.material.navigation.NavigationView;
 
-public class MyPetActivity extends AppCompatActivity {
+public class MyPetActivity extends DrawerBaseActivity {
 
-    DrawerLayout drawerLayoutPet;
-    ActionBarDrawerToggle actionBarDrawerTogglePet;
-    NavigationView navigationViewPet;
+    ActivityMyPetBinding activityMyPetBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_pet);
 
-
+        activityMyPetBinding = ActivityMyPetBinding.inflate(getLayoutInflater());
+        setContentView(activityMyPetBinding.getRoot());
+        allocateActivityTitle(getString(R.string.my_pets));
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        if (actionBarDrawerTogglePet.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
 
 

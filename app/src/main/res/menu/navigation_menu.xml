@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/nav_home"
-        android:title="Home" />
+        android:id="@+id/nav_dashboard"
+        android:title="@string/dashboard" />
 
     <item
         android:id="@+id/nav_pet"
-        android:title="I miei animali" />
+        android:title="@string/my_pets" />
 
     <item
         android:id="@+id/nav_clinics"
-        android:title="Cliniche in zona" />
+        android:title="@string/clinics" />
 
 </menu>
