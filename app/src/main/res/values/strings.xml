@@ -9,4 +9,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="my_pets">I miei animali</string>
     <string name="clinics">Cliniche in zona</string>
+    <string name="settings">Impostazioni</string>
+    <string name="title_activity_clinics">ClinicsActivity</string>
+    <string name="api_value">AIzaSyDyKZkcs6WWZEMXhSNMzCBSDj6jGEvEfa0</string>
 </resources>
