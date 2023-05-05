@@ -1,7 +1,5 @@
 package com.example.veterinaria;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -12,17 +10,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.veterinaria.databinding.ActivityClinicsBinding;
 
-public class ClinicsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private ActivityClinicsBinding binding;
+    private ActivityClinicsBinding activityClinicsBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityClinicsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+        activityClinicsBinding = ActivityClinicsBinding.inflate(getLayoutInflater());
+        setContentView(activityClinicsBinding.getRoot());
+        allocateActivityTitle(getString(R.string.clinics));
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
