@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.airbnb.lottie.L;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -25,6 +26,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.veterinaria.databinding.ActivityClinicsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -72,8 +76,7 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
         dataFetch[0] = mMap;
         dataFetch[1] = url;
 
-        FetchData fetchData = new FetchData();
-        fetchData.execute(dataFetch);
+        new PlaceTask().execute(url);
 
 
     }
@@ -137,6 +140,90 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     }
 
 
+    private class PlaceTask extends AsyncTask<String, Integer, String>{
+
+
+        @Override
+        protected String doInBackground(String... strings) {
+
+            String data = null;
+
+            try {
+                data = downloadUrl(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+            new ParserTask().execute(s);
+        }
+    }
+
+    private String downloadUrl(String string) throws  IOException{
+
+        URL url = new URL(string);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+        httpURLConnection.connect();
+        InputStream inputStream = httpURLConnection.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line = "";
+
+        while ((line  = bufferedReader.readLine()) != null){
+            stringBuilder.append(line);
+        }
+
+        String data = stringBuilder.toString();
+        bufferedReader.close();
+
+        return data;
+    }
+
+
+    private class ParserTask extends AsyncTask<String,Integer,List<HashMap<String,String>>>{
+
+        @Override
+        protected List<HashMap<String, String>> doInBackground(String... strings) {
+
+            JsonParser jsonParser = new JsonParser();
+            List<HashMap<String,String>> mapList = null;
+            JSONObject object = null;
+            try {
+                object = new JSONObject(strings[0]);
+                mapList = jsonParser.parseResult(object);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+            return mapList;
+        }
+
+        @Override
+        protected void onPostExecute(List<HashMap<String, String>> hashMaps) {
+
+            mMap.clear();
+            for(int i=0; i<hashMaps.size(); i++){
+                HashMap<String,String> hashMapList = hashMaps.get(i);
+                double lat = Double.parseDouble(hashMapList.get("lat"));
+                double lng = Double.parseDouble(hashMapList.get("lng"));
+                String name = hashMapList.get("name");
+                LatLng latLng = new LatLng(lat,lng);
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng);
+                markerOptions.title(name);
+                mMap.addMarker(markerOptions);
+
+            }
+
+        }
+
+
+    }
 
 
 
