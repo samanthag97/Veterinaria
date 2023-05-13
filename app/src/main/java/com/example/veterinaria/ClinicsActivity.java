@@ -26,7 +26,11 @@ import com.example.veterinaria.databinding.ActivityClinicsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+
+>>>>>>> Stashed changes
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -52,6 +56,10 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
 
     private static final int REQUEST_CODE = 101;
     private static final int ZOOM = 10;
+<<<<<<< Updated upstream
+=======
+    String veterinario = "veterinarian";
+>>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +72,13 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getCurrentLocation();
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+        //still not working but at least it won't crush
+
+
+>>>>>>> Stashed changes
         //part for nearby places
         String url = "https://maps.googleapis.com/maps/place/nearbysearch/json?"+
                 "location=" + currentLat + "," + currentLong +
@@ -75,10 +89,13 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
         dataFetch[0] = mMap;
         dataFetch[1] = url;
 
+<<<<<<< Updated upstream
         new PlaceTask().execute(url);
 
 =======
 >>>>>>> parent of 1c2ee45 (find neaby places not working)
+=======
+>>>>>>> Stashed changes
 
     }
 
@@ -217,7 +234,10 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     }
 
 
+<<<<<<< Updated upstream
 
 =======
 >>>>>>> parent of 1c2ee45 (find neaby places not working)
+=======
+>>>>>>> Stashed changes
 }
