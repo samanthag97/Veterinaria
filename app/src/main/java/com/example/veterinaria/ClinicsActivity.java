@@ -2,7 +2,6 @@ package com.example.veterinaria;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -27,6 +26,7 @@ import com.example.veterinaria.databinding.ActivityClinicsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+<<<<<<< HEAD
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +39,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+=======
+>>>>>>> parent of 1c2ee45 (find neaby places not working)
 public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -47,12 +49,9 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
     Location currentLocation;
-    double currentLat;
-    double currentLong;
 
     private static final int REQUEST_CODE = 101;
     private static final int ZOOM = 10;
-    String veterinario = "veterinarian"; //stringa per cercare cliniche in zona
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +59,12 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
 
         activityClinicsBinding = ActivityClinicsBinding.inflate(getLayoutInflater());
         setContentView(activityClinicsBinding.getRoot());
-
         allocateActivityTitle(getString(R.string.clinics));
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getCurrentLocation();
 
+<<<<<<< HEAD
         //part for nearby places
         String url = "https://maps.googleapis.com/maps/place/nearbysearch/json?"+
                 "location=" + currentLat + "," + currentLong +
@@ -78,6 +77,8 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
 
         new PlaceTask().execute(url);
 
+=======
+>>>>>>> parent of 1c2ee45 (find neaby places not working)
 
     }
 
@@ -85,14 +86,7 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        //currentLat = currentLocation.getLatitude();
-        //currentLong = currentLocation.getLongitude();
-
-        //Sydney, just for running it on the emulator
-        currentLat = -33.855102;
-        currentLong = 151.237471;
-
-        LatLng current = new LatLng(currentLat, currentLong);
+        LatLng current = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         mMap.addMarker(new MarkerOptions().position(current));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(current));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, ZOOM));
@@ -101,10 +95,7 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
 
     private void getCurrentLocation() {
 
-        if (ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{
                     Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
@@ -115,11 +106,10 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
             public void onSuccess(Location location) {
                 if(location != null){
                     currentLocation = location;
+                    //Toast.makeText(getApplicationContext(), currentLocation.getLatitude()+""+currentLocation.getLongitude(),Toast.LENGTH_LONG).show();
                     SupportMapFragment supportMapFragment=(SupportMapFragment) getSupportFragmentManager()
                             .findFragmentById(R.id.map);
                     supportMapFragment.getMapAsync(ClinicsActivity.this);
-
-
                 }
             }
         });
@@ -140,6 +130,7 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     }
 
 
+<<<<<<< HEAD
     private class PlaceTask extends AsyncTask<String, Integer, String>{
 
 
@@ -227,4 +218,6 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
 
 
 
+=======
+>>>>>>> parent of 1c2ee45 (find neaby places not working)
 }
