@@ -2,6 +2,7 @@ package com.example.veterinaria;
 
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -26,11 +27,7 @@ import com.example.veterinaria.databinding.ActivityClinicsBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
 
->>>>>>> Stashed changes
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,8 +40,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
-=======
->>>>>>> parent of 1c2ee45 (find neaby places not working)
 public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -53,13 +48,12 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     FusedLocationProviderClient fusedLocationProviderClient;
     LocationRequest locationRequest;
     Location currentLocation;
+    double currentLat;
+    double currentLong;
 
     private static final int REQUEST_CODE = 101;
     private static final int ZOOM = 10;
-<<<<<<< Updated upstream
-=======
     String veterinario = "veterinarian";
->>>>>>> Stashed changes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,13 +66,9 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         getCurrentLocation();
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
         //still not working but at least it won't crush
 
 
->>>>>>> Stashed changes
         //part for nearby places
         String url = "https://maps.googleapis.com/maps/place/nearbysearch/json?"+
                 "location=" + currentLat + "," + currentLong +
@@ -89,13 +79,6 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
         dataFetch[0] = mMap;
         dataFetch[1] = url;
 
-<<<<<<< Updated upstream
-        new PlaceTask().execute(url);
-
-=======
->>>>>>> parent of 1c2ee45 (find neaby places not working)
-=======
->>>>>>> Stashed changes
 
     }
 
@@ -147,97 +130,6 @@ public class ClinicsActivity extends DrawerBaseActivity implements OnMapReadyCal
     }
 
 
-<<<<<<< HEAD
-    private class PlaceTask extends AsyncTask<String, Integer, String>{
 
 
-        @Override
-        protected String doInBackground(String... strings) {
-
-            String data = null;
-
-            try {
-                data = downloadUrl(strings[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return data;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-
-            new ParserTask().execute(s);
-        }
-    }
-
-    private String downloadUrl(String string) throws  IOException{
-
-        URL url = new URL(string);
-        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-        httpURLConnection.connect();
-        InputStream inputStream = httpURLConnection.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = "";
-
-        while ((line  = bufferedReader.readLine()) != null){
-            stringBuilder.append(line);
-        }
-
-        String data = stringBuilder.toString();
-        bufferedReader.close();
-
-        return data;
-    }
-
-
-    private class ParserTask extends AsyncTask<String,Integer,List<HashMap<String,String>>>{
-
-        @Override
-        protected List<HashMap<String, String>> doInBackground(String... strings) {
-
-            JsonParser jsonParser = new JsonParser();
-            List<HashMap<String,String>> mapList = null;
-            JSONObject object = null;
-            try {
-                object = new JSONObject(strings[0]);
-                mapList = jsonParser.parseResult(object);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-            return mapList;
-        }
-
-        @Override
-        protected void onPostExecute(List<HashMap<String, String>> hashMaps) {
-
-            mMap.clear();
-            for(int i=0; i<hashMaps.size(); i++){
-                HashMap<String,String> hashMapList = hashMaps.get(i);
-                double lat = Double.parseDouble(hashMapList.get("lat"));
-                double lng = Double.parseDouble(hashMapList.get("lng"));
-                String name = hashMapList.get("name");
-                LatLng latLng = new LatLng(lat,lng);
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.position(latLng);
-                markerOptions.title(name);
-                mMap.addMarker(markerOptions);
-
-            }
-
-        }
-
-
-    }
-
-
-<<<<<<< Updated upstream
-
-=======
->>>>>>> parent of 1c2ee45 (find neaby places not working)
-=======
->>>>>>> Stashed changes
 }
