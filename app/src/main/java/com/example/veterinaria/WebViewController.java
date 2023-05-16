@@ -12,4 +12,12 @@ public class WebViewController extends WebViewClient {
         view.loadUrl(url);
         return true;
     }
+
+    @Override
+    public void onPageFinished(WebView view, String url) {
+        //nasconde parti di website non volute
+        view.loadUrl("javascript:document.getElementById('omnibox-container').style.display = 'none';");
+    }
+
+
 }

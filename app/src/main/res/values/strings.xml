@@ -12,4 +12,8 @@
     <string name="settings">Impostazioni</string>
     <string name="title_activity_clinics">ClinicsActivity</string>
     <string name="api_value">AIzaSyDyKZkcs6WWZEMXhSNMzCBSDj6jGEvEfa0</string>
+    <string name="register_here">New user? Register here!</string>
+    <string name="email">Enter e-mail</string>
+    <string name="password">Password</string>
+    <string name="registration_page">Registration page</string>
 </resources>
